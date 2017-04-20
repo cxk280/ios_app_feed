@@ -1,4 +1,4 @@
-// List view with those feeds. Show the stuff that is in the feed. Ensure loading and scrolling goes to 100 pages, each with 10 feeds. 1000 feeds total.
+// List view with the feeds. Show the stuff that is in the feed. Ensure loading and scrolling goes to 100 pages, each with 10 feeds. 1000 feeds total.
 
 import React, { Component } from 'react';
 import {
@@ -7,22 +7,12 @@ import {
   Text,
   View
 } from 'react-native';
+import Feed from './App/Components/Feed'
 
 export default class AppFeed extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Feed />
     );
   }
 }
