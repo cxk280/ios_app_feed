@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+// List view with those feeds. Show the stuff that is in the feed. Ensure loading and scrolling goes to 100 pages, each with 10 feeds. 1000 feeds total.
 
 import React, { Component } from 'react';
 import {
