@@ -4,36 +4,43 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
+  Navigator
 } from 'react-native';
-import Feed from './App/Components/Feed'
+
+import Feed from './App/Components/Feed';
+import WebPage from './App/Components/WebPage';
+
+const ROUTES = {
+  feed_items: Feed,
+  web_page: WebPage
+}
 
 export default class AppFeed extends Component {
+
+  renderScene(route, navigator) {
+
+    let Component = ROUTES[route.name];
+    return (
+        <Component route={route} navigator={navigator} url={route.url} />
+    );
+  }
+
+
   render() {
     return (
-      <Feed />
+      <Navigator
+        style={styles.container}
+        initialRoute={{name: 'feed_items', url: ''}}
+        renderScene={this.renderScene}
+        configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }} />
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    flex: 1
+  }
 });
 
 AppRegistry.registerComponent('AppFeed', () => AppFeed);

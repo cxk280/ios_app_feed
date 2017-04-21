@@ -143,7 +143,7 @@ export default class Feed extends Component {
   }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1
   },
