@@ -1,5 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -10,6 +11,9 @@ import {
   TouchableHightlight,
   AsyncStorage
 } from 'react-native';
+
+import moment from 'moment';
+
 import api from '../Api/api';
 
 let total_feed_items = 1000;
