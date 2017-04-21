@@ -15,6 +15,8 @@ import GiftedSpinner from 'react-native-gifted-spinner';
 import moment from 'moment';
 import api from '../Api/api';
 
+
+const STORAGE_KEY = '@AsyncStorageExample:key';
 let total_feed_items = 1000;
 
 export default class Feed extends Component {
@@ -25,7 +27,6 @@ export default class Feed extends Component {
     this.state = {
       title: 'Feed',
       dataSource: ds.cloneWithRows(['']),
-      feedItems: {},
       loaded: false
     };
   }
@@ -37,13 +38,10 @@ export default class Feed extends Component {
     );
   }
 
-  getFeed() {
 
-    console.log('getFeed running');
 
-    let feed_items = [];
 
-    AsyncStorage.setItem('time', JSON.stringify({'last_cache': moment()}));
+  componentDidMount() {
 
     for(let i = 0; i <= 10; i++){
       let item_url = "https://api.addicaid.com/feeds?page=" + i;
@@ -51,8 +49,6 @@ export default class Feed extends Component {
         (item) => {
           console.log('item: ',item);
           feed_items.push(item);
-          updateFeedItemsUI(feed_items);
-          updateFeedItemsDB(feed_items);
         }
       );
     }
