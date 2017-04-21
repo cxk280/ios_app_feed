@@ -108,10 +108,70 @@ export default class Feed extends Component {
 
   render() {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>{rowData}</Text>}
-      />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.header_item}>
+            <Text style={styles.header_text}>{this.state.title}</Text>
+          </View>
+          <View style={styles.header_item}>
+          {  !this.state.loaded &&
+            <GiftedSpinner />
+          }
+          </View>
+        </View>
+        <View style={styles.body}>
+        <ScrollView ref="scrollView">
+        {
+          this.state.loaded &&
+
+          <ListView initialListSize={1} dataSource={this.state.feedItems} style={styles.feed_item} renderRow={this.renderFeed}></ListView>
+
+        }
+        </ScrollView>
+        </View>
+      </View>
     );
   }
 }
+
+let styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  header: {
+    backgroundColor: '#FF6600',
+    padding: 10,
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
+  body: {
+    flex: 9,
+    backgroundColor: '#F6F6EF'
+  },
+  header_item: {
+  paddingLeft: 10,
+  paddingRight: 10,
+  justifyContent: 'center'
+  },
+  header_text: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 15
+  },
+  button: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0'
+  },
+  feed_item: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginBottom: 5
+  },
+  feed_item_text: {
+    color: '#575757',
+    fontSize: 18
+  }
+});
