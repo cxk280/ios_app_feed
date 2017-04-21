@@ -49,16 +49,25 @@ export default class Feed extends Component {
           }else{
             this.updateFeedItemsUI(let_items);
           }
-
         });
-
-
       }else{
         this.getFeed();
       }
-
     }).done();
+  };
 
+  renderFeed(feed) {
+    return (
+      <TouchableHighlight onPress={this.viewPage.bind(this, feed.url)} underlayColor={"#E8E8E8"} style={styles.button}>
+      <View style={styles.feed_item}>
+        <Text style={styles.feed_item_text}>{feed.title}</Text>
+      </View>
+      </TouchableHighlight>
+    );
+  };
+
+  viewPage(url){
+    this.props.navigator.push({name: 'web_page', url: url});
   }
 
   updateFeedItemsUI(feed_items) {
