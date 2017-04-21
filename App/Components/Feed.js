@@ -19,7 +19,30 @@ export default class Feed extends Component {
       feedItems: {},
       loaded: false
     };
-  }
+  },
+
+  getFeed: function() {
+
+      let FEED_URL = 'https://api.addicaid.com/feeds';
+      let feed_items = [];
+
+    AsyncStorage.setItem('time', JSON.stringify({'last_cache': moment()}));
+
+      api(FEED_URL).then(
+        (top_items) => {
+          for(let i = 0; i <= 10; i++){
+            let item_url = "https://api.addicaid.com/feeds?page=" + i;
+            api(item_url).then(
+              (item) => {
+                feed_items.push(item);
+                // this.updateFeedItemsUI(feed_items);
+                // this.updateFeedItemDB(feed_items);
+              }
+            );
+          }
+        }
+      );
+  };
 
   render() {
     return (
