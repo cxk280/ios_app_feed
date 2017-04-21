@@ -21,6 +21,20 @@ export default class Feed extends Component {
     };
   },
 
+  updateFeedItemsUI: function(feed_items){
+
+    if(feed_items.length == total_feed_items){
+
+      let ds = this.state.dataSource.cloneWithRows(feed_items);
+      this.setState({
+        'feed': ds,
+        'loaded': true
+      });
+
+    }
+
+  },
+
   updateFeedItemDB: function(feed_items){
 
     if(feed_items.length == total_feed_items){
