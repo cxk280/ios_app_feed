@@ -21,30 +21,33 @@ export default class WebPage extends Component {
 
   render(){
 
-    return (<View style={styles.container}>
-
-      <View style={styles.webview_header}>
-        <View style={styles.header_item}>
-          <Button style={styles.button} onPress={this.back}>Back</Button>
-        </View>
-        <View style={styles.header_item}>
-          <Text style={styles.page_title}>{this.truncate(this.state.pageTitle)}</Text>
-        </View>
-        <View style={[styles.header_item, styles.spinner]}>
-          { this.state.isLoading && <GiftedSpinner /> }
-        </View>
-      </View>
-
-      <View style={styles.webview_body}>
-        <WebView
-          url={this.props.url}
-          onNavigationStateChange={this.onNavigationStateChange}
-
-        />
-      </View>
-    </View>);
+    return (
+      <Feed />
+    );
 
   }
+
+  // <View style={styles.container}>
+  //   <View style={styles.webview_header}>
+  //     <View style={styles.header_item}>
+  //       <Button style={styles.button} onPress={this.back}>Back</Button>
+  //     </View>
+  //     <View style={styles.header_item}>
+  //       <Text style={styles.page_title}>{this.truncate(this.state.pageTitle)}</Text>
+  //     </View>
+  //     <View style={[styles.header_item, styles.spinner]}>
+  //       { this.state.isLoading && <GiftedSpinner /> }
+  //     </View>
+  //   </View>
+
+  //   <View style={styles.webview_body}>
+  //     <WebView
+  //       url={this.props.url}
+  //       onNavigationStateChange={this.onNavigationStateChange}
+
+  //     />
+  //   </View>
+  // </View>
 
   truncate(str){
     return _.truncate(str, 20);
