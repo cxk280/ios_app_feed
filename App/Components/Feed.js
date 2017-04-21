@@ -57,7 +57,7 @@ export default class Feed extends Component {
 
     }).done();
 
-  },
+  }
 
   updateFeedItemsUI(feed_items) {
 
@@ -71,7 +71,7 @@ export default class Feed extends Component {
 
     }
 
-  },
+  }
 
   updateFeedItemDB(feed_items) {
 
@@ -79,7 +79,7 @@ export default class Feed extends Component {
       AsyncStorage.setItem('feed_items', JSON.stringify(feed_items));
     }
 
-  },
+  }
 
   getFeed() {
 
