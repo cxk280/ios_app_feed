@@ -1,6 +1,5 @@
 'use strict';
 import React, { Component } from 'react';
-
 import {
   AppRegistry,
   StyleSheet,
@@ -11,9 +10,9 @@ import {
   TouchableHightlight,
   AsyncStorage
 } from 'react-native';
-
+import Button from 'react-native-button';
+import GiftedSpinner from 'react-native-gifted-spinner';
 import moment from 'moment';
-
 import api from '../Api/api';
 
 let total_feed_items = 1000;
@@ -87,8 +86,8 @@ export default class Feed extends Component {
 
   getFeed() {
 
-      let FEED_URL = 'https://api.addicaid.com/feeds';
-      let feed_items = [];
+    let FEED_URL = 'https://api.addicaid.com/feeds';
+    let feed_items = [];
 
     AsyncStorage.setItem('time', JSON.stringify({'last_cache': moment()}));
 
@@ -99,7 +98,7 @@ export default class Feed extends Component {
             api(item_url).then(
               (item) => {
                 feed_items.push(item);
-                // this.updateFeedItemsUI(feed_items);
+                this.updateFeedItemsUI(feed_items);
                 this.updateFeedItemDB(feed_items);
               }
             );
