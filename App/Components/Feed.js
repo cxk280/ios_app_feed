@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet
+  StyleSheet,
   Text,
   ListView,
   View,
@@ -25,9 +25,9 @@ export default class Feed extends Component {
       feedItems: {},
       loaded: false
     };
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
 
     AsyncStorage.getItem('feed_items').then((feed_items_str) => {
 
@@ -59,7 +59,7 @@ export default class Feed extends Component {
 
   },
 
-  updateFeedItemsUI: function(feed_items){
+  updateFeedItemsUI(feed_items) {
 
     if(feed_items.length == total_feed_items){
 
@@ -73,7 +73,7 @@ export default class Feed extends Component {
 
   },
 
-  updateFeedItemDB: function(feed_items){
+  updateFeedItemDB(feed_items) {
 
     if(feed_items.length == total_feed_items){
       AsyncStorage.setItem('feed_items', JSON.stringify(feed_items));
@@ -81,7 +81,7 @@ export default class Feed extends Component {
 
   },
 
-  getFeed: function() {
+  getFeed() {
 
       let FEED_URL = 'https://api.addicaid.com/feeds';
       let feed_items = [];
