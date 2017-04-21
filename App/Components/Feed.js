@@ -1,8 +1,14 @@
 'use strict';
 import React, { Component } from 'react';
 import {
+  AppRegistry,
+  StyleSheet
   Text,
-  ListView
+  ListView,
+  View,
+  ScrollView,
+  TouchableHightlight,
+  AsyncStorage
 } from 'react-native';
 import api from '../Api/api';
 
