@@ -37,9 +37,9 @@ export default class Feed extends Component {
           let diff_days = current_datetime.diff(last_cache, 'days');
 
           if(diff_days > 0){
-            this.getNews();
+            this.getFeed();
           }else{
-            this.updateNewsItemsUI(let_items);
+            this.updateFeedItemsUI(let_items);
           }
 
         });
