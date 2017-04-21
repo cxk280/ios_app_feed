@@ -21,6 +21,14 @@ export default class Feed extends Component {
     };
   },
 
+  updateFeedItemDB: function(feed_items){
+
+    if(feed_items.length == total_feed_items){
+      AsyncStorage.setItem('feed_items', JSON.stringify(feed_items));
+    }
+
+  },
+
   getFeed: function() {
 
       let FEED_URL = 'https://api.addicaid.com/feeds';
@@ -36,7 +44,7 @@ export default class Feed extends Component {
               (item) => {
                 feed_items.push(item);
                 // this.updateFeedItemsUI(feed_items);
-                // this.updateFeedItemDB(feed_items);
+                this.updateFeedItemDB(feed_items);
               }
             );
           }
