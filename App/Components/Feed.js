@@ -21,6 +21,38 @@ export default class Feed extends Component {
     };
   },
 
+  componentDidMount: function() {
+
+    AsyncStorage.getItem('feed_items').then((feed_items_str) => {
+
+      let feed_items = JSON.parse(feed_items_str);
+
+      if(feed_items != null){
+
+        AsyncStorage.getItem('time').then((time_str) => {
+          let time = JSON.parse(time_str);
+          let last_cache = time.last_cache;
+          let current_datetime = moment();
+
+          let diff_days = current_datetime.diff(last_cache, 'days');
+
+          if(diff_days > 0){
+            this.getNews();
+          }else{
+            this.updateNewsItemsUI(let_items);
+          }
+
+        });
+
+
+      }else{
+        this.getFeed();
+      }
+
+    }).done();
+
+  },
+
   updateFeedItemsUI: function(feed_items){
 
     if(feed_items.length == total_feed_items){
