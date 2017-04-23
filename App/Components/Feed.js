@@ -72,10 +72,3 @@ export default class Feed extends Component {
   };
 
 }
-
-let styles = StyleSheet.create({
-  listView: {
-    flex: 1
-    // height: Viewport.height
-  }
-});
