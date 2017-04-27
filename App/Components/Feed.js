@@ -13,6 +13,7 @@ import {
 // import Button from 'react-native-button';
 // import GiftedSpinner from 'react-native-gifted-spinner';
 // import moment from 'moment';
+import Dataset from 'impagination';
 import api from '../Api/api';
 
 let feed_items = [];
@@ -21,6 +22,23 @@ let feed_items = [];
 let total_feed_items = 1000;
 let whichPage = 1;
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+let dataset = new Dataset({
+  pageSize: 10, // num records per page
+  loadHorizon: 10, // window of records to keep (default: pageSize)
+  fetch: function(pageOffset, pageSize, stats) { // How to `fetch` a page
+    stats.totalPages = 100;
+    // Returns a `thenable` which resolves with page's `records`
+    return $.ajax({ method, url });
+  },
+  unfetch: function(records, pageOffset) {} // invoked whenever a page is unloaded
+  filter: function(element, index, array) {} // filters `records` whenever a page resolves
+  observe: function(nextState) { // invoked whenever a new `state` is generated
+    dataset.state = nextState;
+  }
+});
+
+dataset.setReadOffset(0);
 
 export default class Feed extends Component {
 
