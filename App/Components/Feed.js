@@ -5,13 +5,14 @@ import {
   StyleSheet,
   Text,
   ListView,
-  View
+  View,
+  RefreshControl
 } from 'react-native';
 import api from '../Api/api';
 
 let feed_items = [];
 let total_feed_items = 1000;
-let whichPage = 1;
+let whichPage = 0;
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class Feed extends Component {
@@ -20,8 +21,7 @@ export default class Feed extends Component {
     super();
     this.state = {
       title: 'Feed',
-      dataSource: ds,
-      loaded: false
+      dataSource: ds
     };
   }
 
@@ -29,13 +29,8 @@ export default class Feed extends Component {
     this.getFeed();
   }
 
-  render() {
-      return (
-        <ListView dataSource={this.state.dataSource} renderRow={(data) => <View><Text>{data}{"\n"}</Text></View>}></ListView>
-    );
-  }
-
   getFeed() {
+    console.log('Running getFeed!')
     for(let i = 0; i < 10; i++){
       let item_url = "https://api.addicaid.com/feeds?page=" + whichPage;
       api(item_url).then(
@@ -54,15 +49,27 @@ export default class Feed extends Component {
       ).then(() => {
         if (i === 9) {
           whichPage += 1;
-          console.log('feed_items at for loop 9: ',feed_items);
+          // console.log('feed_items at for loop 9: ',feed_items);
           this.setState({
-            title: 'Feed',
-            dataSource: ds.cloneWithRows(feed_items),
-            loaded: true
+            dataSource: ds.cloneWithRows(feed_items)
           });
         }
       });
     };
+  }
+
+
+  render() {
+      return (
+          <ListView
+            enableEmptySections={true}
+            dataSource={this.state.dataSource}
+            renderRow={(data) => <View><Text>{data}{"\n"}</Text></View>}
+            onEndReachedThreshold= {1}
+            onEndReached={ this.getFeed.bind(this) }
+            >
+          </ListView>
+    );
   }
 
 }
