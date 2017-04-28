@@ -23,23 +23,6 @@ let total_feed_items = 1000;
 let whichPage = 1;
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-let dataset = new Dataset({
-  pageSize: 10, // num records per page
-  loadHorizon: 10, // window of records to keep (default: pageSize)
-  fetch: function(pageOffset, pageSize, stats) { // How to `fetch` a page
-    stats.totalPages = 100;
-    // Returns a `thenable` which resolves with page's `records`
-    return $.ajax({ method, url });
-  },
-  unfetch: function(records, pageOffset) {} // invoked whenever a page is unloaded
-  filter: function(element, index, array) {} // filters `records` whenever a page resolves
-  observe: function(nextState) { // invoked whenever a new `state` is generated
-    dataset.state = nextState;
-  }
-});
-
-dataset.setReadOffset(0);
-
 export default class Feed extends Component {
 
   constructor() {
@@ -47,10 +30,36 @@ export default class Feed extends Component {
     this.state = {
       title: 'Feed',
       dataSource: ds,
-      loaded: false
+      loaded: false,
+      dataset: null,
+      datasetState: null
     };
   }
 
+  setupImpagination() {
+    let dataset = new Dataset({
+      pageSize: 10,
+      observe: (datasetState) => {
+        //Set this as the value to this.state.impaginationState
+        this.setState({datasetState});
+      },
+      fetch(pageOffset, pageSize, stats) {
+        return fetch(`https://api.addicaid.com/feeds?page=${pageOffset + 1}`)
+          .then(response => response.json())
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
+
+    dataset.setReadOffset(0);
+    this.setState({dataset});
+  }
+
+  componentWillMount() {
+    // this.setupImpagination();
+    this.getFeed();
+  }
 
   render() {
       return (
@@ -86,10 +95,5 @@ export default class Feed extends Component {
       });
     };
   }
-
-
-  componentWillMount() {
-    this.getFeed();
-  };
 
 }
