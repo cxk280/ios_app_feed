@@ -30,33 +30,36 @@ export default class Feed extends Component {
 
   getFeed() {
     // console.log('Running getFeed!')
-    for(let i = 0; i < 10; i++){
-      let item_url = "https://api.addicaid.com/feeds?page=" + whichPage;
-      api(item_url).then(
-        (item) => {
-          feed_items.push('\n');
-          feed_items.push('***');
-          feed_items.push('\n');
-          feed_items.push(item[i].user.username);
-          feed_items.push('\n');
-          if (item[i].text === '') {
-            feed_items.push('No text');
-          } else {
-            feed_items.push(item[i].text);
+    if (feed_items.length < 1000 ) {
+      for(let i = 0; i < 10; i++){
+        let item_url = "https://api.addicaid.com/feeds?page=" + whichPage;
+        api(item_url).then(
+          (item) => {
+            feed_items.push('\n');
+            feed_items.push('***');
+            feed_items.push('\n');
+            feed_items.push(item[i].user.username);
+            feed_items.push('\n');
+            if (item[i].text === '') {
+              feed_items.push('No text');
+            } else {
+              feed_items.push(item[i].text);
+            }
           }
-        }
-      ).then(() => {
-        if (i === 9) {
-          whichPage += 1;
-          // console.log('feed_items at for loop 9: ',feed_items);
-          this.setState({
-            dataSource: ds.cloneWithRows(feed_items)
-          });
-        }
-      });
-    };
+        ).then(() => {
+          if (i === 9) {
+            whichPage += 1;
+            // console.log('feed_items at for loop 9: ',feed_items);
+            this.setState({
+              dataSource: ds.cloneWithRows(feed_items)
+            });
+          }
+        });
+      };
+    } else {
+      console.log('Already loaded 1000 items');
+    }
   }
-
 
   render() {
       return (

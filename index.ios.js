@@ -1,5 +1,3 @@
-// List view with the feeds. Show the stuff that is in the feed. Ensure loading and scrolling goes to 100 pages, each with 10 feeds. 1000 feeds total.
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
