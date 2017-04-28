@@ -13,7 +13,7 @@ import {
 // import Button from 'react-native-button';
 // import GiftedSpinner from 'react-native-gifted-spinner';
 // import moment from 'moment';
-import Dataset from 'impagination';
+// import Dataset from 'impagination';
 import api from '../Api/api';
 
 let feed_items = [];
@@ -31,30 +31,30 @@ export default class Feed extends Component {
       title: 'Feed',
       dataSource: ds,
       loaded: false,
-      dataset: null,
-      datasetState: null
+      // dataset: null,
+      // datasetState: null
     };
   }
 
-  setupImpagination() {
-    let dataset = new Dataset({
-      pageSize: 10,
-      observe: (datasetState) => {
-        //Set this as the value to this.state.impaginationState
-        this.setState({datasetState});
-      },
-      fetch(pageOffset, pageSize, stats) {
-        return fetch(`https://api.addicaid.com/feeds?page=${pageOffset + 1}`)
-          .then(response => response.json())
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-    });
+  // setupImpagination() {
+  //   let dataset = new Dataset({
+  //     pageSize: 10,
+  //     observe: (datasetState) => {
+  //       //Set this as the value to this.state.impaginationState
+  //       this.setState({datasetState});
+  //     },
+  //     fetch(pageOffset, pageSize, stats) {
+  //       return fetch(`https://api.addicaid.com/feeds?page=${pageOffset + 1}`)
+  //         .then(response => response.json())
+  //         .catch((error) => {
+  //           console.error(error);
+  //         });
+  //     }
+  //   });
 
-    dataset.setReadOffset(0);
-    this.setState({dataset});
-  }
+  //   dataset.setReadOffset(0);
+  //   this.setState({dataset});
+  // }
 
   componentWillMount() {
     // this.setupImpagination();
