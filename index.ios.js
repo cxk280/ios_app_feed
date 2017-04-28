@@ -3,36 +3,18 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Navigator
+  StyleSheet
 } from 'react-native';
 
 import Feed from './App/Components/Feed';
-import WebPage from './App/Components/WebPage';
-
-const ROUTES = {
-  feed_items: Feed,
-  web_page: WebPage
-}
 
 export default class AppFeed extends Component {
 
-  renderScene(route, navigator) {
-
-    let Component = ROUTES[route.name];
-    return (
-        <Component route={route} navigator={navigator} url={route.url} />
-    );
-  }
 
 
   render() {
     return (
-      <Navigator
-        style={styles.container}
-        initialRoute={{name: 'feed_items', url: ''}}
-        renderScene={this.renderScene}
-        configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }} />
+      <Feed />
     );
   }
 }
