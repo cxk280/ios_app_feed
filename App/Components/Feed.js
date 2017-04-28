@@ -63,7 +63,7 @@ export default class Feed extends Component {
           <ListView
             enableEmptySections={true}
             dataSource={this.state.dataSource}
-            renderRow={(data) => <View><Text>{data}{"\n"}</Text></View>}
+            renderRow={(data) => <View><Text style={styles.listItem}>{data}{"\n"}</Text></View>}
             onEndReachedThreshold= {10}
             onEndReached={ this.getFeed.bind(this) }
             >
@@ -72,3 +72,9 @@ export default class Feed extends Component {
   }
 
 }
+
+const styles = StyleSheet.create({
+  listItem: {
+    textAlign: 'center'
+  }
+});
