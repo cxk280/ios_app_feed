@@ -65,7 +65,7 @@ export default class Feed extends Component {
             enableEmptySections={true}
             dataSource={this.state.dataSource}
             renderRow={(data) => <View><Text>{data}{"\n"}</Text></View>}
-            onEndReachedThreshold= {1}
+            onEndReachedThreshold= {10}
             onEndReached={ this.getFeed.bind(this) }
             >
           </ListView>
