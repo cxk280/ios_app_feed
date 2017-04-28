@@ -29,7 +29,7 @@ export default class Feed extends Component {
   }
 
   getFeed() {
-    console.log('Running getFeed!')
+    // console.log('Running getFeed!')
     for(let i = 0; i < 10; i++){
       let item_url = "https://api.addicaid.com/feeds?page=" + whichPage;
       api(item_url).then(
