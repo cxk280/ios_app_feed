@@ -5,8 +5,7 @@ import {
   StyleSheet,
   Text,
   ListView,
-  View,
-  RefreshControl
+  View
 } from 'react-native';
 import api from '../Api/api';
 
